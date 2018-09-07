@@ -95,34 +95,34 @@ contract MainSale is Ownable {
 
     ERC20 public token;
     
-    address reserve = 0x611200beabeac749071b30db84d17ec205654463;
-    address promouters = 0x2632d043ac8bbbad07c7dabd326ade3ca4f6b53e;
-    address bounty = 0xff5a1984fade92bfb0e5fd7986186d432545b834;
+    address Teams = 0xe3af41343b5E797f7f164c7883Bbb842797bE52a;
+    address promouters = 0xBFA33ECdeCD1D2959317be0EF471CEd60bB67681;
+    address bounty = 0x50DBe7eB46556dFD1D271dE3Fe4802A860132844;
 
     uint256 public constant decimals = 18;
     uint256 constant dec = 10**decimals;
 
     mapping(address=>bool) whitelist;
 
-    uint256 public startCloseSale = now; // start // 1.07.2018 10:00 UTC
-    uint256 public endCloseSale = 1532987999; // Monday, 30-Jul-18 23:59:59 UTC-2
+    uint256 public startCloseSale = now; // start // 1.10.2018 10:00 UTC
+    uint256 public endCloseSale = 1540900800; // Tue, 30 Oct 2018 12:00:00 GMT
 
-    uint256 public startStage1 = 1532988001; // Tuesday, 31-Jul-18 00:00:01 UTC-2
-    uint256 public endStage1 = 1533074399; // Tuesday, 31-Jul-18 23:59:59 UTC-2
+    uint256 public startStage1 = 1540900801; // Tue, 30 Oct 2018 12:00:01 GMT
+    uint256 public endStage1 = 1543579200; // Fri, 30 Nov 2018 12:00:00 GMT
 
-    uint256 public startStage2 = 1533074400; // Wednesday, 01-Aug-18 00:00:00 UTC-2
-    uint256 public endStage2 = 1533679199; // Tuesday, 07-Aug-18 23:59:59 UTC-2
+    uint256 public startStage2 = 1543579201; // Fri, 30 Nov 2018 12:00:01 GMT
+    uint256 public endStage2 = 1546171200; // Sun, 30 Dec 2018 12:00:00 GMT
 
-    uint256 public startStage3 = 1533679200; // Wednesday, 08-Aug-18 00:00:00 UTC-2 
-    uint256 public endStage3 = 1535752799; // Friday, 31-Aug-18 23:59:59 UTC-2
+    uint256 public startStage3 = 1546171201; // Sun, 30 Dec 2018 12:00:00 GMT
+    uint256 public endStage3 = 1548849600; // Wed, 30 Jan 2019 12:00:00 GMT
 
-    uint256 public buyPrice = 920000000000000000; // 0.92 Ether
+    uint256 public buyPrice = 10000000000000; // 0.00001 Ether
     
     uint256 public ethUSD;
 
     uint256 public weisRaised = 0;
 
-    string public stageNow = "NoSale";
+    string public stageNow = "Sale";
     
     event Authorized(address wlCandidate, uint timestamp);
     event Revoked(address wlCandidate, uint timestamp);
@@ -203,7 +203,7 @@ contract MainSale is Ownable {
      */
     function ()  public payable {
         
-        require(msg.value >= (1*1e18/ethUSD*100));
+        require(msg.value >= (1*1e18/ethUSD*1));
 
         if (now >= startCloseSale || now <= endCloseSale) {
             require(isWhitelisted(msg.sender));
@@ -237,8 +237,8 @@ contract MainSale is Ownable {
         token.transferFromICO(_investor, tokens);
         weisRaised = weisRaised.add(msg.value);
 
-        uint256 tokensReserve = tokens.mul(15).div(68); // 15 %
-        token.transferFromICO(reserve, tokensReserve);
+        uint256 tokensTeams = tokens.mul(15).div(68); // 15 %
+        token.transferFromICO(Teams, tokensTeams);
 
         uint256 tokensBoynty = tokens.div(34); // 2 %
         token.transferFromICO(bounty, tokensBoynty);
@@ -257,8 +257,8 @@ contract MainSale is Ownable {
 
         token.transferFromICO(_investor, tokens);
 
-        uint256 tokensReserve = tokens.mul(5).div(22); // 15 %
-        token.transferFromICO(reserve, tokensReserve);
+        uint256 tokensTeams = tokens.mul(5).div(22); // 15 %
+        token.transferFromICO(Teams, tokensTeams);
 
         uint256 tokensBoynty = tokens.mul(2).div(33); // 4 %
         token.transferFromICO(bounty, tokensBoynty);
@@ -279,8 +279,8 @@ contract MainSale is Ownable {
 
         token.transferFromICO(_investor, tokens);
 
-        uint256 tokensReserve = tokens.mul(15).div(64); // 15 %
-        token.transferFromICO(reserve, tokensReserve);
+        uint256 tokensTeams = tokens.mul(15).div(64); // 15 %
+        token.transferFromICO(Teams, tokensTeams);
 
         uint256 tokensBoynty = tokens.mul(3).div(32); // 6 %
         token.transferFromICO(bounty, tokensBoynty);
@@ -297,8 +297,8 @@ contract MainSale is Ownable {
         uint256 tokens = _value.mul(1e18).div(buyPrice); // 62 %
         token.transferFromICO(_investor, tokens);
 
-        uint256 tokensReserve = tokens.mul(15).div(62); // 15 %
-        token.transferFromICO(reserve, tokensReserve);
+        uint256 tokensTeams = tokens.mul(15).div(62); // 15 %
+        token.transferFromICO(Teams, tokensTeams);
 
         uint256 tokensBoynty = tokens.mul(4).div(31); // 8 %
         token.transferFromICO(bounty, tokensBoynty);
