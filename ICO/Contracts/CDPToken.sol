@@ -12,7 +12,9 @@ function mul(uint256 a, uint256 b) internal pure returns (uint256 c) {
 }
 
 function div(uint256 a, uint256 b) internal pure returns (uint256) {
-   
+    // assert(b > 0); // Solidity automatically throws when dividing by 0
+    // uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
     return a / b;
 }
 
@@ -231,8 +233,8 @@ contract CDPToken is StandardToken, Pausable {
 
 using SafeMath for uint256;
 
-string  public name = "CDP";
-string  public symbol = "CDP";
+string  public name = "RiF";
+string  public symbol = "RiF";
 uint256 constant public decimals = 18;
 uint256 constant dec = 10**decimals;
 uint256 public initialSupply = 70000000000*dec;
